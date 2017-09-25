@@ -1,15 +1,17 @@
 from nodoUsuario import nodoUsuario
-
+import os
 class Usuarios():
 	def __init__(self):
 		self.raiz=None
+		self.primero=None
 
 	def crear(self,usuario,passwd):
-		hoja = nodoUsuario(usuario,passwd,None,None)
+		hoja = nodoUsuario(usuario,passwd,usuario,None,None)
 
 		if self.raiz==None:
 			self.raiz=hoja
-			return "V"
+			self.primero=hoja
+			return "El usuario ha sido creado con exito"
 		else:
 			return self.comparaHijo(self.raiz,hoja)
 
