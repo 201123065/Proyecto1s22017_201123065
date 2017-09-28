@@ -1,14 +1,22 @@
 from arbolB import arbolB
 from nodoUsuario import nodoUsuario
+from random import choice
+
 import os
 class Sesion():
 	def __init__(self):
 		self.ultimo=None
 
 	def crear(self,user,password):
-		cad =str(os.path.abspath(""))+"/DRIVE"
-		print cad
-		usuario = nodoUsuario(user,password,user,None,None)
+		cad =str(os.path.abspath(""))+"/NUBE/"+user
+		longitud = 18
+		valores = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ<=>@#%&+"
+		key = ""
+		key = key.join([choice(valores) for i in range(longitud)])
+		nuevo = arbolB()
+		cad=nuevo.crear()
+
+		usuario = nodoUsuario(user,password,cad,key,None,None)
 		if self.ultimo==None:
 			usuario.next=usuario
 			usuario.prev=usuario
@@ -22,9 +30,7 @@ class Sesion():
 					temp.prev.next=usuario
 					usuario.next= temp
 					temp.prev = usuario
-					# ****ACA SE CREA LA CARPETA *** #
-					# ****ACA SE CREA LA CARPETA *** #
-					# ****ACA SE CREA LA CARPETA *** #
+					os.mkdir(cad)
 					return user+" fue creado con exito"
 				elif temp.user==user:
 					return "este usuario ya existe"
@@ -45,9 +51,7 @@ class Sesion():
 			else:
 				return "este usuario ya existe"
 
-			# ****ACA SE CREA LA CARPETA *** #
-			# ****ACA SE CREA LA CARPETA *** #
-			# ****ACA SE CREA LA CARPETA *** #
+			os.mkdir(cad)
 			return user+" fue creado con exito"
 
 	def login(self,user,password):
@@ -55,19 +59,13 @@ class Sesion():
 			temp=self.ultimo.next
 			while temp!=self.ultimo:
 				if temp.user==user and temp.password == password:
-					# ****ACA SE MUESTRA LA CARPETA ***
-					# ****ACA SE MUESTRA LA CARPETA ***
-					# ****ACA SE MUESTRA LA CARPETA ***
-					return "V"
+					return temp.carpetas
 				elif temp.user>user:
 					return "F"
 				else:
 					temp=temp.next
 			if temp.user==user and temp.password==password:
-				# ****ACA SE MUESTRA LA CARPETA ***
-				# ****ACA SE MUESTRA LA CARPETA ***
-				# ****ACA SE MUESTRA LA CARPETA ***
-				return "V"
+				return temp.carpetas
 			else:
 				return "F"
 		else:
@@ -75,12 +73,28 @@ class Sesion():
 
 
 
+	def obtener_ruta(self,user):
+		temp=self.ultimo.next
+		while temp!=self.ultimo:
+			if temp.user==user:
+				return temp.carpetas
+			elif temp.user>user:
+				return "-"
+			temp=temp.next
 
+		if temp.user==user:
+			return temp.carpetas
+		else:
+			return "-"
 
-	def crearCarpeta(self,nombre):
-		cad =str(os.path.abspath(""))
-		print cad
-		return cad
-		
+	def obtener_grafo(self):
+		temp = self.ultimo.next
+		cad="digraph g{";
+		while temp!=self.ultimo:
+			cad=cad+temp.user+"->"+temp.next.user+";"
+			cad=cad+temp.next.user+"->"+temp.user+";"
+			temp=temp.next
+		return cad+"}"
+
 
 

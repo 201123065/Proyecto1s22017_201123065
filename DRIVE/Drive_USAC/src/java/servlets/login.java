@@ -7,12 +7,13 @@ package servlets;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.net.URLEncoder;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
+import servlets.header_footer;
 /**
  *
  * @author marcosmayen
@@ -32,42 +33,41 @@ public class login extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
+            header_footer web = new header_footer();
+            out.print(web.header());
             String usu = request.getParameter("nombre");
             String pass = request.getParameter("passwd");
-            /* TODO output your page here. You may use following sample code. */
+            out.print(usu);
+            out.print("<br/>");
+            out.print(pass);
+            out.print("<br/>");
             conexion cu = new conexion();
-            
-             out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet logea</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println(cu.Login(usu, pass));
-            out.println(usu+"___"+pass);
-            
-            if(cu.Login(usu, pass).equals("V")){
-                out.println("<h1>SIMON ENTRO</h1>");
-                HttpSession session = request.getSession();
-                session.setAttribute("usuario", usu);
-                    out.println(cu.getSuper(session.getId()));
-            out.println(cu.getSuper(session.getId()));
-                //if(cu.getSuper(session.getId()).equals("V")){
-                 //   response.sendRedirect("/battleship_prueba/admin.jsp");
-               // }
-                //else{
-                  //  response.sendRedirect("/battleship_prueba/Menu.jsp");
-                    
-                //}
+            HttpSession sesion = request.getSession();
+            if (usu!=null && pass!=null){
+                if(cu.Login(usu, pass).equals("F")){
+                    String message="El usuario o la contrase&ntilde;a estan equivocados, favor volver a intentar";
+                    response.sendRedirect("index.jsp?message=" + URLEncoder.encode(message, "UTF-8"));
+
+                }else{
+
+                    if (sesion.getAttribute("nombre")==null){
+                        sesion.setAttribute("nombre", usu);
+                        out.print("bienvenido :) "+sesion.getAttribute("nombre"));
+                        response.sendRedirect("inicio");
+
+                    }else{
+                        out.print("bienvenido "+sesion.getAttribute("nombre"));
+                        response.sendRedirect("inicio");
+                    }
+
+                }
+            }else{
+                    String message="";
+                    response.sendRedirect("inicio");
             }
-            else{
-                out.println("<h1>anomanoasdasdsa</h1>");
-                
             
-            }
-            out.println("<h1>Servlet logea at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+            
+            out.print(web.footer());
         }
     }
 

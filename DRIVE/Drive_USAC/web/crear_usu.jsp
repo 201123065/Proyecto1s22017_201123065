@@ -31,6 +31,7 @@
             <p>Contrase&ntilde;<input type="text" name ="passwd" id="passwd" class="pull-right col-lg-8"/></p>
             <p>Confirmar contrase&ntilde;a<input type="text" name ="p2" id="p2" class="pull-right col-lg-8"/></p>
             <p><input type="submit" name="crear" value="crear" class="btn-primary col-lg-12"/></p>
+            <a href="/Drive_USAC">regresar</a>
         </form>
         </div>
       <div class="col-lg-4"></div>

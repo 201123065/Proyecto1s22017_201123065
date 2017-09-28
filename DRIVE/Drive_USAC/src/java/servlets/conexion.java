@@ -47,8 +47,8 @@ public class conexion {
     
     public String CrearUsuario(String nombre2, String passwd){ 
         RequestBody formBody = new FormEncodingBuilder()
-                .add("nombre", nombre2)
-                .add("passwd", passwd)
+                .add("usuario", nombre2)
+                .add("password", passwd)
                 .build();
         String r = getString("crear_usuario", formBody); 
         System.out.println(r + "---");

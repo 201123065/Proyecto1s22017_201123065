@@ -2,28 +2,34 @@ from flask import Flask,request
 
 from usuarios import Usuarios
 from sesion import Sesion 
+from bitacora import bitacora
 app = Flask("usuario")
 
 usuario = Usuarios()
 sesion = Sesion()
+bita = bitacora()
 
 @app.route('/crear_usuario',methods=['POST'])
 def crear_usuariol():
+	print "crear usuario"
 	usu = str(request.form['usuario'])
 	passwd = str(request.form['password'])
-	return sesion.crear(usu,passwd)
-
-@app.route('/prueba')
-def prueba():
-	ret = "str(request.form['val1'])"
-	return sesion.crearCarpeta(ret)
+	ret =sesion.crear(usu,passwd)
+	bita.cargar(ret)
+	return ret
 
 @app.route('/login',methods=['POST'])
 def login():
-	print "hola"
 	usu = str(request.form['usuario'])
 	passwd = str(request.form['password'])
-	return sesion.login(usu,passwd)
+	ret= sesion.login(usu,passwd)
+	bita.cargar(ret)
+	return ret
+
+@app.route('/cargar',methods=['POST'])
+def cargar():
+	ruta = str(request.form['ruta'])
+	
 
 
 

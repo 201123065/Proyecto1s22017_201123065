@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
+import servlets.header_footer;
 /**
  *
  * @author marcosmayen
@@ -31,20 +31,34 @@ public class crear extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        
+        header_footer webs = new header_footer();
         try (PrintWriter out = response.getWriter()) {
             String usu = request.getParameter("nombre");
             String pass = request.getParameter("passwd");
             String repite = request.getParameter("p2");
+            out.print(webs.header());
             if (pass.equals(repite)){
-                conexion cu = new conexion();
-                out.print(cu.CrearUsuario(usu, pass));
+                if(pass.length()>3){
+                    if(!usu.equals("")){
+                        conexion cu = new conexion();
+                        out.print("<h2 class='center'>"+cu.CrearUsuario(usu, pass)+"</h2>");
+                    }
+                    else{
+                        out.print("<h2 class='center'>El usuario no puede permanecer en blanco</h2>");
+                        
+                    }
+                        
+                    
+                }else{
+                    out.print("<h2 class='center'>La contraseña debe contener al menos 4 caracteres</h2>");
+                }
                 
             }
             else{
-                out.print("la contrase&ntilde;a no coincide, favor revisar");
-                out.print("</br><a href='/Drive_USAC/crear_usu.jsp'>regresar</a>");
+                out.print("<h2 class='center'>la contrase&ntilde;a no coincide, favor revisar</h2>");
             }
+                out.print("</br><a href='/Drive_USAC/crear_usu.jsp'>regresar</a>");
+                out.print(webs.footer());
             /* TODO output your page here. You may use following sample code. */
             
             
