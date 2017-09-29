@@ -55,6 +55,17 @@ public class conexion {
        
         return r+"";
     }
+    public String verCarperas(String nombre){
+        RequestBody formBody = new FormEncodingBuilder()
+                .add("user", nombre)
+                .build();
+        String r = getString("carpeta", formBody); 
+        System.out.println(r + "---");
+       
+        return r+"";
+        
+    }
+    
     
     public String ModificarUsuario(String nombre2, String passwd){ 
         RequestBody formBody = new FormEncodingBuilder()

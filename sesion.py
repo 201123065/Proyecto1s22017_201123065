@@ -58,17 +58,60 @@ class Sesion():
 			temp=self.ultimo.next
 			while temp!=self.ultimo:
 				if temp.user==user and temp.password == password:
-					return temp.carpetas
+					return "V"
 				elif temp.user>user:
 					return "F"
 				else:
 					temp=temp.next
 			if temp.user==user and temp.password==password:
-				return temp.carpetas
+				return "V"
 			else:
 				return "F"
 		else:
 			return "F"
+	def obtener_raiz(self,user):
+		if self.ultimo!=None:
+			temp=self.ultimo.next
+			while temp!=self.ultimo:
+				if temp.user==user:
+					return temp.carpetas
+				elif temp.user>user:
+					return None
+				else:
+					temp=temp.next
+			if temp.user==user:
+				return temp.carpetas
+			else:
+				return None
+		return None
+	def carpetas(self,tst):
+		folder = self.obtener_raiz(tst)
+		if folder==None:
+			return "F"
+		else:
+			return "<ul>"+self.muestra(folder)+"</ul>"
+
+	def muestra(self,folder):
+		cad=""
+		if folder.p1!=None:
+			cad=cad+self.muestra(folder.p1)
+		if folder.c1!=None:
+			cad=cad+"<li>"+folder.c1+"</li>"
+		if folder.p2!=None:
+			cad=cad+self.muestra(folder.p2)
+		if folder.c2!=None:
+			cad=cad+"<li>"+folder.c2+"</li>"
+		if folder.p3!=None:
+			cad=cad+self.muestra(folder.p3)
+		if folder.c3!=None:
+			cad=cad+"<li>"+folder.c3+"</li>"
+		if folder.p4!=None:
+			cad=cad+self.muestra(folder.p4)
+		if folder.c4!=None:
+			cad=cad+"<li>"+folder.c4+"</li>"
+		if folder.p5!=None:
+			cad=cad+self.muestra(folder.p5)
+		return cad
 
 
 

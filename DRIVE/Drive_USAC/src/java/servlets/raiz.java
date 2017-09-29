@@ -42,8 +42,11 @@ public class raiz extends HttpServlet {
                 response.sendRedirect("inicio");
                 
             }
+            HttpSession sesion = request.getSession();
+            conexion c = new conexion();
+            String cad = c.verCarperas(sesion.getAttribute("nombre").toString());
             out.print(s.cabeza(ccn+" raz"));
-            out.print("<div>hola</div>");
+            out.print("<div>"+cad+"</div>");
             out.print(s.pie());
         }
     }

@@ -28,8 +28,25 @@ def login():
 
 @app.route('/cargar',methods=['POST'])
 def cargar():
-	ruta = str(request.form['ruta'])
-	
+	user = str(request.form['user'])
+	archivo = str(request.form['arch'])
+	ret = sesion.obtener_raiz(user)
+	if ret==None:
+		return "F"
+	else:
+		return ret.agregar(archivo)
+
+
+@app.route('/carpeta',methods=['POST'])
+def carpeta():
+	ruta = str(request.form['user'])
+	ret = sesion.obtener_raiz(ruta)
+	print ret
+	if ret==None:
+		return "F"
+	else:
+		return sesion.carpetas(ruta)
+
 
 
 

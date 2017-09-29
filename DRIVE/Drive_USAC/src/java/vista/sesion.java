@@ -21,7 +21,7 @@ public class sesion {
 "    <meta name=\"description\" content=\"\">\n" +
 "    <meta name=\"author\" content=\"\">\n" +
 "\n" +
-"    <title>Simple Sidebar - Start Bootstrap Template</title>\n" +
+"    <title>Usac Drive</title>\n" +
 "\n" +
 "    <!-- Bootstrap core CSS -->\n" +
 "    <link href=\"css/bootstrap.min.css\" rel=\"stylesheet\">\n" +
@@ -46,7 +46,9 @@ public class sesion {
 "                    <a href=\"raiz\">/</a>\n" +
 "                </li>\n" +
 "                <li>\n" +
-"                    <a href=\"#\">crear carpeta</a>\n" +
+                "<input type=\"text\" id=\"text\" />\n" +
+"<input type=\"button\" id=\"btn\" value=\"carpeta\" onClick=\"javascript: window.open('http://www.mywebsite.com/print/' + document.getElementById('text').value);\" />"+                
+"                    <a href=\"crear\">crear carpeta</a>\n" +
 "                </li>\n" +
 "                <li>\n" +
 "                    <a href=\"#\">cargar archivo</a>\n" +
