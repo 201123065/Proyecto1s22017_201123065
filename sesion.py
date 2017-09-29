@@ -8,7 +8,6 @@ class Sesion():
 		self.ultimo=None
 
 	def crear(self,user,password):
-		cad =str(os.path.abspath(""))+"/NUBE/"+user
 		longitud = 18
 		valores = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ<=>@#%&+"
 		key = ""
