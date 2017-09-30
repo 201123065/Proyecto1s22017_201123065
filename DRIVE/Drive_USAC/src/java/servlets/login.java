@@ -41,6 +41,7 @@ public class login extends HttpServlet {
             out.print("<br/>");
             out.print(pass);
             out.print("<br/>");
+            request.getSession().invalidate();
             conexion cu = new conexion();
             HttpSession sesion = request.getSession();
             if (usu!=null && pass!=null){
@@ -49,7 +50,6 @@ public class login extends HttpServlet {
                     response.sendRedirect("index.jsp?message=" + URLEncoder.encode(message, "UTF-8"));
 
                 }else{
-
                     if (sesion.getAttribute("nombre")==null){
                         sesion.setAttribute("nombre", usu);
                         out.print("bienvenido :) "+sesion.getAttribute("nombre"));

@@ -46,9 +46,6 @@ public class sesion {
 "                    <a href=\"raiz\">/</a>\n" +
 "                </li>\n" +
 "                <li>\n" +
-"                    <a href=\"crear\">crear carpeta</a>\n" +
-"                </li>\n" +
-"                <li>\n" +
 "                    <a href=\"#\">cargar archivo</a>\n" +
 "                </li>\n" +
 "                <li>\n" +
@@ -66,7 +63,7 @@ public class sesion {
 "\n" +
 "        <!-- Page Content -->\n" +
 "        <div id=\"page-content-wrapper\">\n" +
-"            <div class=\"container-fluid\">\n" +
+"            <div class=\"container-fluid col-lg-12 col-md-12 col-sm-12\">\n" +
 "                <h1>Bienvenido "+nombre+"</h1>\n" +
 "                <a href=\"#menu-toggle\" class=\"btn btn-secondary\" id=\"menu-toggle\">Menu</a>\n" +
 "            </div>";

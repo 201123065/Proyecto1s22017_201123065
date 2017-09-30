@@ -7,6 +7,7 @@ package servlets;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.net.URLEncoder;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -39,24 +40,49 @@ public class raiz extends HttpServlet {
             sesion s = new sesion();
             String ccn = ses.getAttribute("nombre").toString();
             if(ccn=="null"){
-                response.sendRedirect("inicio");
+                response.sendRedirect("/Drive_USAC?message=" + URLEncoder.encode("sesion cerrada", "UTF-8"));
                 
             }
             HttpSession sesion = request.getSession();
             conexion c = new conexion();
             String cad = c.verCarperas(sesion.getAttribute("nombre").toString());
             out.print(s.cabeza(ccn));
-            out.print("<div>");
             
+            out.print("<div class ='col-lg-4'>");
             out.print(" <form action=\"create_folder\" method=\"post\">");
-            out.print("<p><input type='text'/ class ='form-control col-lg-6'></p>");
-            out.print("<p><input type=\"submit\" name=\"entrar\" value=\"crear carpeta\" class=\"btn-primary col-lg-6\"/></p>");
-            out.print("</form><br/>");
+            
+            out.print("<input type='text'/ class ='form-control'>");
+            out.print("<input type=\"submit\" name=\"entrar\" value=\"crear carpeta\" class=\"btn-primary col-lg-12 col-md-12 col-sm-12\"/>");
+            
+            out.print("</form>");
+            out.print("</div>");
+            
+            
+            out.print("<div class ='col-lg-4'>");
+            
+            out.print(" <form action=\"load_file\" method=\"post\">");
+            out.print("<input type='file'/ class ='fileupload'>");
+            out.print("<input type=\"submit\" name=\"entrar\" value=\"cargar archivo\" class=\"btn-primary col-lg-6 col-md-6 col-sm-6\"/>");
+            
+            out.print("</form>");
+            out.print("</div>");
+            
+             out.print("<div class ='col-lg-4'>");
+            out.print("</div>");
+             out.print("<div class ='col-lg-4'>");
+            out.print("</div>");
+            
+            
+             out.print("<div class ='col-lg-12'>");
+            out.print("<br/");
+            out.print("</div>");
+            
+             out.print("<div class ='col-lg-12'>");
             
             if (cad.equals("F")){
                 out.print("la carpeta parece estar vacia");
             }else{
-                out.print("<div>"+cad+"</div>");
+                out.print(cad);
                 
             }
             out.print("</div>");

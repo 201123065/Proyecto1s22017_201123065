@@ -7,19 +7,16 @@ package servlets;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.net.URLEncoder;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-import vista.sesion;
 
 /**
  *
  * @author marcosmayen
  */
-public class create_folder extends HttpServlet {
+public class carpeta_cargar extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -34,24 +31,16 @@ public class create_folder extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-             HttpSession ses = request.getSession();
-             
-            
-            sesion s = new sesion();
-            String ccn = ses.getAttribute("nombre").toString();
-            if(ccn=="null"){
-                response.sendRedirect("/Drive_USAC?message=" + URLEncoder.encode("sesion cerrada", "UTF-8"));
-                
-            }
-            conexion c = new conexion();
-            
-            
-            out.print(s.cabeza(ccn));
-            out.print("<div>");
-            out.print("saludos desde creador de folders");
-            
-            out.print("</div>");
-            out.print(s.pie());
+            /* TODO output your page here. You may use following sample code. */
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Servlet carpeta_cargar</title>");            
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<h1>Servlet carpeta_cargar at " + request.getContextPath() + "</h1>");
+            out.println("</body>");
+            out.println("</html>");
         }
     }
 
