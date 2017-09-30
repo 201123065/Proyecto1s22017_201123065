@@ -63,7 +63,18 @@ public class conexion {
         System.out.println(r + "---");
        
         return r+"";
-        
+    }
+    
+    
+    public String cargarCarperas(String nombre,String file){
+        RequestBody formBody = new FormEncodingBuilder()
+                .add("user", nombre)
+                .add("arch",file)
+                .build();
+        String r = getString("cargar", formBody); 
+        System.out.println(r + "---");
+       
+        return r+"";
     }
     
     

@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import servlets.header_footer;
+import vista.sesion;
 /**
  *
  * @author marcosmayen
@@ -33,36 +34,26 @@ public class crear extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         header_footer webs = new header_footer();
         try (PrintWriter out = response.getWriter()) {
-            String usu = request.getParameter("nombre");
-            String pass = request.getParameter("passwd");
-            String repite = request.getParameter("p2");
-            out.print(webs.header());
-            if (pass.equals(repite)){
-                if(pass.length()>3){
-                    if(!usu.equals("")){
-                        conexion cu = new conexion();
-                        out.print("<h2 class='center'>"+cu.CrearUsuario(usu, pass)+"</h2>");
-                    }
-                    else{
-                        out.print("<h2 class='center'>El usuario no puede permanecer en blanco</h2>");
-                        
-                    }
-                        
-                    
-                }else{
-                    out.print("<h2 class='center'>La contraseña debe contener al menos 4 caracteres</h2>");
-                }
+            
+            HttpSession ses = request.getSession();
+            
+            sesion s = new sesion();
+            String ccn = ses.getAttribute("nombre").toString();
+            if(ccn=="null"){
+                response.sendRedirect("inicio");
                 
             }
-            else{
-                out.print("<h2 class='center'>la contrase&ntilde;a no coincide, favor revisar</h2>");
-            }
-                out.print("</br><a href='/Drive_USAC/crear_usu.jsp'>regresar</a>");
-                out.print(webs.footer());
-            /* TODO output your page here. You may use following sample code. */
-            
-            
-            
+            HttpSession sesion = request.getSession();
+            conexion c = new conexion();
+            String cad = c.verCarperas(sesion.getAttribute("nombre").toString());
+            out.print(s.cabeza(ccn));
+            String cad2 = "<form action=\"/action_page.php\">\n" +
+"  First name: <input type=\"text\" name=\"fname\"><br>\n" +
+"  Last name: <input type=\"text\" name=\"lname\"><br>\n" +
+"  <input type=\"submit\" value=\"Submit\">\n" +
+"</form>" ;
+            out.print(cad2);
+            out.print(s.pie());
         }
     }
 

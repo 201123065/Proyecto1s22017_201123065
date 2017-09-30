@@ -46,8 +46,6 @@ public class sesion {
 "                    <a href=\"raiz\">/</a>\n" +
 "                </li>\n" +
 "                <li>\n" +
-                "<input type=\"text\" id=\"text\" />\n" +
-"<input type=\"button\" id=\"btn\" value=\"carpeta\" onClick=\"javascript: window.open('http://www.mywebsite.com/print/' + document.getElementById('text').value);\" />"+                
 "                    <a href=\"crear\">crear carpeta</a>\n" +
 "                </li>\n" +
 "                <li>\n" +
@@ -70,6 +68,11 @@ public class sesion {
 "                <a href=\"#menu-toggle\" class=\"btn btn-secondary\" id=\"menu-toggle\">Menu</a>\n" +
 "            </div>";
     }
+    
+   
+    
+    
+    
     
     
     public String pie(){
@@ -97,5 +100,8 @@ public class sesion {
 "</html>\n" +
 "\n";
     }
+    
+    
+    
     
 }
