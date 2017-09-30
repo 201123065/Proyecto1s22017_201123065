@@ -46,7 +46,20 @@ public class raiz extends HttpServlet {
             conexion c = new conexion();
             String cad = c.verCarperas(sesion.getAttribute("nombre").toString());
             out.print(s.cabeza(ccn));
-            out.print("<div>"+cad+"</div>");
+            out.print("<div>");
+            
+            out.print(" <form action=\"create_folder\" method=\"post\">");
+            out.print("<p><input type='text'/ class ='form-control col-lg-6'></p>");
+            out.print("<p><input type=\"submit\" name=\"entrar\" value=\"crear carpeta\" class=\"btn-primary col-lg-6\"/></p>");
+            out.print("</form><br/>");
+            
+            if (cad.equals("F")){
+                out.print("la carpeta parece estar vacia");
+            }else{
+                out.print("<div>"+cad+"</div>");
+                
+            }
+            out.print("</div>");
             out.print(s.pie());
         }
     }

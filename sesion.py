@@ -49,8 +49,6 @@ class Sesion():
 				self.ultimo=temp
 			else:
 				return "este usuario ya existe"
-
-			os.mkdir(cad)
 			return user+" fue creado con exito"
 
 	def login(self,user,password):
@@ -69,6 +67,7 @@ class Sesion():
 				return "F"
 		else:
 			return "F"
+
 	def obtener_raiz(self,user):
 		if self.ultimo!=None:
 			temp=self.ultimo.next
@@ -84,6 +83,25 @@ class Sesion():
 			else:
 				return None
 		return None
+
+
+	def crear_folder(self,user,nombre):
+		if self.ultimo!=None:
+			temp=self.ultimo.next
+			while temp!=self.ultimo:
+				if temp.user==user:
+					temp.carpetas
+				elif temp.user>user:
+					return "F"
+				else:
+					temp=temp.next
+			if temp.user==user and temp.password==password:
+				return "V"
+			else:
+				return "F"
+		else:
+			return "F"
+
 	def carpetas(self,tst):
 		folder = self.obtener_raiz(tst)
 		if folder==None:

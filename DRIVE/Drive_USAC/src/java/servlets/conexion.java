@@ -65,6 +65,16 @@ public class conexion {
         return r+"";
     }
     
+    public String crearCarpeta(String nombre){
+        RequestBody formBody = new FormEncodingBuilder()
+                .add("folder", nombre)
+                .build();
+        String r = getString("cargar_folder", formBody); 
+        System.out.println(r + "---");
+       
+        return r+"";
+        
+    }
     
     public String cargarCarperas(String nombre,String file){
         RequestBody formBody = new FormEncodingBuilder()

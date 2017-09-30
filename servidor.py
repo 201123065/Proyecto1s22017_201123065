@@ -15,6 +15,7 @@ def crear_usuariol():
 	usu = str(request.form['usuario'])
 	passwd = str(request.form['password'])
 	ret =sesion.crear(usu,passwd)
+	print "hola-"+ret
 	bita.cargar(ret)
 	return ret
 
@@ -26,6 +27,7 @@ def login():
 	bita.cargar(ret)
 	return ret
 
+
 @app.route('/cargar',methods=['POST'])
 def cargar():
 	user = str(request.form['user'])
@@ -36,6 +38,10 @@ def cargar():
 	else:
 		return ret.agregar(archivo)
 
+@app.route('/crear_folder',methods=['POST'])
+def crear_folder():
+	folder = str(request.form['folder'])
+	sesion.crear_folder()
 
 @app.route('/carpeta',methods=['POST'])
 def carpeta():

@@ -5,16 +5,11 @@ class AVL:
 		self.raiz==None
 
 	def agregar(self,nombre,contenido):
-		hoja = nodoAVL(nombre,contenido,0,None,None)
-		retorno=""
+		nuevo = nodoAVL(nombre,contenido,0,izq,der)
 		if self.raiz==None:
-			self.raiz=hoja
-			retorno= "agregado correctamente"
+			self.raiz=nuevo
 		else:
-			retorno=self.setHoja(self.raiz,hoja)
-
-		if "agregado" in retorno:
-			self.balancear(self.raiz,0)
+			self.raiz=self.insertarAVL(nuevo,raiz)
 
 
 		return retorno
@@ -24,7 +19,7 @@ class AVL:
 			return -1
 		else:
 			return raiz.fe
-	def rotaIZQ(raiz):
+	def rotaIzq(raiz):
 		aux=raiz.izq
 		raiz.izq=raiz.der
 		aux.der=raiz
@@ -40,32 +35,57 @@ class AVL:
 		aux.fe=max(self.obtenerFE(aux.izq),self.obtenerFE(aux.der))+1
 		return aux
 
+	def rotaDIzq(raiz):
+		raiz.izq=self.rotaDer(raiz.izq)
+		temp=self.rotaIzq(raiz)
+		return temp
 
-	def setHoja(self,raiz,hoja):
+	def rotaDder(raiz):
+		raiz.der=self.rotaIzq(raiz.der)
+		temp=self.rotaDer(raiz)
+		return temp
 
-		if raiz.nombre>hoja.nombre:
-			if raiz.izq==None:
-				raiz.izq=hoja
-				return "agregado correctamente"
+
+	def insertarAVL(nuevo,subAr):
+		nuevoPadre=subAr
+		if nuevo.nombre<subAr.nombre:
+			if subAr.izq==None:
+				subAr.izq=nuevo
 			else:
-				return self.setHoja(raiz.izq,hoja)
-		elif raiz.nombre<hoja.nombre:
-			if raiz.der==None:
-				raiz.der=hoja
-				return "agregado correctamente"
+				subAr.izq=self.insertarAVL(nuevo,subAr.izq)
+				if self.obtenerFE(subAr.izq)-self.obtenerFE(subAr.der)==2:
+					if nuevo.nombre<subAr.izq.nombre:
+						nuevoPadre=self.rotaIzq(subAr)
+					else:
+						nuevoPadre=self.rotaDIzq(subAr)
+		elif nuevo.nombre>subAr.nombre:
+			if subAr.der==None:
+				subAr.der=nuevo
 			else:
-				return self.setHoja(raiz.der,hoja)
+				subAr.izq=self.insertarAVL(nuevo,subAr.der)
+				if self.obtenerFE(subAr.der)-self.obtenerFE(subAr.izq)==2:
+					if nuevo.nombre>subAr.der.nombre:
+						nuevoPadre=rotaDer(subAr)
+					else:
+						nuevoPadre=self.rotaDder(subAr)
 		else:
-			return "error al agregar"
+			print "ya existe"
+		if subAr.izq==None and subAr.der!=None:
+			subAr.fe=subAr.der.fe+1
+		elif subAr.der==None and subAr.izq!=None:
+			subAr.fe=subAr.izq.fe+1
+		else:
+			subAr.fe=max(obtenerFE(subAr.izq),obtenerFE(subAr.der))+1
+		return nuevoPadre
 
-	def balancear(self,raiz,num):
-		izq=0
-		der=0
 
-		if raiz.izq!=None:
-			izq=self.balancear(raiz.izq,0)
-		if raiz.der!=None:
-			der=self.balancear(raiz.der,0)
+
+
+
+
+
+
+
 
 
 

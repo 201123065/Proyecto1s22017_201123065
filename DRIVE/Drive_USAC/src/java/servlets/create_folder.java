@@ -12,14 +12,13 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import servlets.header_footer;
 import vista.sesion;
-import vista.sitio;
+
 /**
  *
  * @author marcosmayen
  */
-public class crear extends HttpServlet {
+public class create_folder extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -33,29 +32,27 @@ public class crear extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        header_footer webs = new header_footer();
         try (PrintWriter out = response.getWriter()) {
+             HttpSession ses = request.getSession();
             
-            sitio s = new sitio();
-            s.header();
-            String user =request.getParameter("nombre");
-            String pass = request.getParameter("passwd");
-            String confirmar= request.getParameter("p2");
-            out.print(out);
-            String mensaje="";
-            if (pass.equals(confirmar)){
-                if (pass.length()>3){
-                    conexion c = new conexion();
-                    mensaje=c.CrearUsuario(user, pass);
-                }else{
-                    mensaje="el password es muy corta";
-                }
+            sesion s = new sesion();
+            String ccn = ses.getAttribute("nombre").toString();
+            if(ccn=="null"){
+                response.sendRedirect("inicio");
+                
             }
-            else{
-                mensaje="las contrase&ntilde;as no coinciden";
-            }
-            response.sendRedirect("/Drive_USAC/crear_usu.jsp?message="+mensaje);
+            conexion c = new conexion();
+            String nombre = request.getParameter("nombre");
             
+            
+            HttpSession sesion = request.getSession();
+            String cad = c.verCarperas(sesion.getAttribute("nombre").toString());
+            out.print(s.cabeza(ccn));
+            out.print("<div>");
+            out.print("saludos desde creador de folders");
+            
+            out.print("</div>");
+            out.print(s.pie());
         }
     }
 

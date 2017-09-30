@@ -55,6 +55,9 @@ public class sesion {
 "                    <a href=\"#\">compartir archivo</a>\n" +
 "                </li>\n" +
 "                <li>\n" +
+"                    <a href=\"#\">compartidas conmigo</a>\n" +
+"                </li>\n" +
+"                <li>\n" +
 "                    <a href=\"#\">ver arbol</a>\n" +
 "                </li>\n" +
 "            </ul>\n" +

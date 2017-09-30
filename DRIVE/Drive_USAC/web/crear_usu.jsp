@@ -17,7 +17,7 @@
 
    </head>
   <body>
-      <div clas="col-lg-4">.</div>
+      <div clas="col-lg-4"><p>${param.message}</p></div>
       <div clas="col-lg-4">
         <h1>Crear usuario</h1>
       </div>
@@ -26,7 +26,7 @@
       <div class="col-lg-4"></div>
       
       <div class="col-lg-4">
-        <form action="crear" nethod="post">
+        <form action="crear" method="post">
             <p>Nombre<input type="text" name ="nombre" id="user" class="pull-right col-lg-8"/></p>
             <p>Contrase&ntilde;<input type="text" name ="passwd" id="passwd" class="pull-right col-lg-8"/></p>
             <p>Confirmar contrase&ntilde;a<input type="text" name ="p2" id="p2" class="pull-right col-lg-8"/></p>
