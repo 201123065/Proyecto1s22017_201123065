@@ -45,7 +45,8 @@ public class raiz extends HttpServlet {
             }
             HttpSession sesion = request.getSession();
             conexion c = new conexion();
-            String cad = c.verCarperas(sesion.getAttribute("nombre").toString());
+            String cad = c.listad(ses.getAttribute("url").toString());
+            //String cad = c.verCarperas(sesion.getAttribute("nombre").toString());
             out.print(s.cabeza(ccn));
             out.print(ses.getAttribute("url"));
             out.print("<div class ='col-lg-4'>");

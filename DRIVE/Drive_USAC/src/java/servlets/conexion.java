@@ -77,12 +77,23 @@ public class conexion {
         return r+"";
     }
     
+    public String listad(String  ruta){
+        RequestBody formBody = new FormEncodingBuilder()
+                .add("user", ruta)
+                .build();
+        String r = getString("listad", formBody); 
+        System.out.println(r + "---");
+       
+        return r+"";
+        
+    }
+    
     public String crearCarpeta(String nombre,String ruta){
         RequestBody formBody = new FormEncodingBuilder()
-                .add("folder", nombre)
-                .add("ruta", ruta)
+                .add("url", nombre)
+                .add("folder", ruta)
                 .build();
-        String r = getString("crear_folder", formBody); 
+        String r = getString("add_folder", formBody); 
         System.out.println(r + "---");
        
         return r+"";

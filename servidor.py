@@ -28,6 +28,33 @@ def login():
 	return ret
 
 
+@app.route('/listad',methods=['POST'])
+def listad():
+	url = str(request.form['user'])
+	return sesion.mostrarArchivos(url)
+
+@app.route('/add_folder',methods=['POST'])
+def add_folder():
+	url = str(request.form['url'])
+	carpetas = str(request.form['folder'])
+	return sesion.setFolder(url,carpetas)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 @app.route('/cargar',methods=['POST'])
 def cargar():
 	user = str(request.form['user'])
@@ -49,6 +76,8 @@ def crear_folder():
 def carpeta():
 	ruta = str(request.form['user'])
 	return sesion.obtener_raiz(ruta)
+
+
 
 
 

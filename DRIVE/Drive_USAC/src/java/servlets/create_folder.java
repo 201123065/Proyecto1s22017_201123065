@@ -38,10 +38,10 @@ public class create_folder extends HttpServlet {
             String url = ses.getAttribute("url").toString();
             String folder = request.getParameter("folder");
             conexion c = new conexion();
-            
-            c.crearCarpeta(folder,url);
             out.print(folder);
-            out.print(url);
+            out.print("</br>"+url);
+            c.crearCarpeta(url,folder);
+            response.sendRedirect("/Drive_USAC/raiz");
         }
     }
 
