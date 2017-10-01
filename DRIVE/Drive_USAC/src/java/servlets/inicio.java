@@ -41,6 +41,7 @@ public class inicio extends HttpServlet {
                 response.sendRedirect("inicio");
                 
             }
+            out.print(ses.getAttribute("url"));
             out.print(s.cabeza(ccn));
             out.print(s.pie());
         }

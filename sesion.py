@@ -1,6 +1,7 @@
-from arbolB import arbolB
+from nodoB import nodoB
 from nodoUsuario import nodoUsuario
 from random import choice
+from tupla import tupla
 
 import os
 class Sesion():
@@ -12,8 +13,7 @@ class Sesion():
 		valores = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ<=>@#%&+"
 		key = ""
 		key = key.join([choice(valores) for i in range(longitud)])
-		nuevo = arbolB()
-		cad=nuevo.crear()
+		cad=nodoB()
 
 		usuario = nodoUsuario(user,password,cad,key,None,None)
 		if self.ultimo==None:
@@ -68,46 +68,168 @@ class Sesion():
 		else:
 			return "F"
 
-	def obtener_raiz(self,user):
+
+
+
+
+
+
+
+	def listarArchivos(self,url):
+
+		name=""
+		i=1
+		while len(ruta.split("/"))>i:
+			name=name+ruta.split("/")[i]+"/"
+			i=i+1
+		user= url.split("/")[0]
 		if self.ultimo!=None:
 			temp=self.ultimo.next
 			while temp!=self.ultimo:
-				if temp.user==user:
-					return temp.carpetas
-				elif temp.user>user:
-					return None
-				else:
-					temp=temp.next
-			if temp.user==user:
-				return temp.carpetas
-			else:
-				return None
-		return None
-
-
-	def crear_folder(self,user,nombre):
-		if self.ultimo!=None:
-			temp=self.ultimo.next
-			while temp!=self.ultimo:
-				if temp.user==user:
-					temp.carpetas
+				if temp.user==user :
+					return "V"
 				elif temp.user>user:
 					return "F"
 				else:
 					temp=temp.next
-			if temp.user==user and temp.password==password:
+			if temp.user==user:
 				return "V"
 			else:
 				return "F"
 		else:
 			return "F"
 
-	def carpetas(self,tst):
-		folder = self.obtener_raiz(tst)
+	def file_route(self,ruta):
+		name=""
+		i=1
+		while len(ruta.split("/"))-1>i:
+			name=name+ruta.split("/")[i]+"/"
+			i=i+1
+
+	def buscar_carpeta(self,nombre,hoja):
+		if hoja.c1!=None:
+			if hoja.c1.nombre>nombre:
+				if hoja.p1!=None:
+					return self.buscar_carpeta(nombre,hoja.p1)
+				return None
+			elif hoja.c1.nombre<nombre:
+				if hoja.c2.nombre>nombre:
+					if hoja.p2!=None:
+						return self.buscar_carpeta(nombre,hoja.p2)
+					return None
+				elif hoja.c2.nombre<nombre:
+					if hoja.c3.nombre>nombre:
+						if hoja.p3!=None:
+							return self.buscar_carpeta(nombre,hoja.p3)
+						return None
+					elif hoja.c3.nombre<nombre:
+						if hoja.c4.nombre>nombre:
+							if hoja.p4!=None:
+								return self.buscar_carpeta(nombre,hoja.p4)
+							return None
+						elif hoja.c4.nombre<nombre:
+							return self.buscar_carpeta(nombre,hoja.p5)
+						else:
+							return hoja.c4
+					else:
+						return hoja.c3
+				else:
+					return hoja.c2
+			else:
+				return hoja.c1
+		else:
+			return None
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	def obtener_raiz(self,user):
+		if self.ultimo!=None:
+			temp=self.ultimo.next
+			while temp!=self.ultimo:
+				if temp.user==user:
+					return self.inspeccionar_folder(temp)
+				elif temp.user>user:
+					return None
+				else:
+					temp=temp.next
+			if temp.user==user:
+				return self.inspeccionar_folder(temp)
+			else:
+				return None
+		return None
+
+	def inspeccionar_folder(self,folder):
+		prueba = arbolB()
+		print folder
+		print folder.carpetas.p1
+		return ";)"
+
+
+
+
+
+
+	def crear_folder(self,nombre,ruta):
+		user = ruta.split("/")[0]
+		name=""
+		i=1
+		while len(ruta.split("/"))>i:
+			name=name+ruta.split("/")[i]+"/"
+			i=i+1
+
+		este=None
+
+		if self.ultimo!=None:
+			temp=self.ultimo.next
+			while temp!=self.ultimo:
+				if temp.user==user:
+					este= temp.carpetas
+
+				elif temp.user>user:
+					return "F"
+				else:
+					temp=temp.next
+			if temp.user==user:
+				este= temp.carpetas
+
+			else:
+				return "F"
+		else:
+			return "F"
+		print str(este)
+		return "V"
+
+
+
+
+
+
+
+
+	def carpetas(self,folder):
 		if folder==None:
 			return "F"
 		else:
-			return "<ul>"+self.muestra(folder)+"</ul>"
+			par= arbolB()
+			return par.listar(folder)
 
 	def muestra(self,folder):
 		cad=""

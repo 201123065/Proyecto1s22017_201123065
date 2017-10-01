@@ -65,11 +65,24 @@ public class conexion {
         return r+"";
     }
     
-    public String crearCarpeta(String nombre){
+    
+    public String addCarperas(String nombre,String folder){
+        RequestBody formBody = new FormEncodingBuilder()
+                .add("user", nombre)
+                .add("folder", folder)
+                .build();
+        String r = getString("carpeta", formBody); 
+        System.out.println(r + "---");
+       
+        return r+"";
+    }
+    
+    public String crearCarpeta(String nombre,String ruta){
         RequestBody formBody = new FormEncodingBuilder()
                 .add("folder", nombre)
+                .add("ruta", ruta)
                 .build();
-        String r = getString("cargar_folder", formBody); 
+        String r = getString("crear_folder", formBody); 
         System.out.println(r + "---");
        
         return r+"";

@@ -1,5 +1,4 @@
 from nodoB import nodoB
-from carpeta import carpeta
 from tupla import tupla
 class arbolB :
 	def __init__(self):
@@ -7,6 +6,7 @@ class arbolB :
 		self.logrado="F"
 	def crear(self):
 		self.raiz=nodoB(None,None,None,None,None,None,None,None,None)
+		return self.raiz
 
 	def ver(self):
 		return "<ul>"+self.listar(self.raiz)+"</ul>"
@@ -34,11 +34,21 @@ class arbolB :
 		return cad
 
 
+	def escanear(self,nombre,url):
+		i=1
+		raiz=self.raiz
+		while len(url.split("/"))-1<i:
+			raiz=self.busqueda_recursiva(raiz,url.split("/")[i])
+			if raiz==None:
+				return "la carpeta no aparece"
+			else:
+				i=i+1
+		self.agregar(nombre,raiz)
 
-	def agregar(self,name):
+	def agregar(self,name,raiz):
 		folderlist=self.crear()
 		carpeta = tupla(name,folderlist,None)
-		self.raiz = self.recursivo(carpeta,self.raiz)
+		self.raiz = self.recursivo(carpeta,raiz)
 		return self.logrado
 
 	def recursivo(self,folder,raiz):
@@ -163,6 +173,47 @@ class arbolB :
 		else:
 			self.logrado="F"
 		return raiz
+
+
+
+
+	def busqueda_recursiva(self,raiz,nombre):
+		if raiz.c1.nombre>nombre:
+			if raiz.p1!=None:
+				return self.busqueda_recursiva(raiz.p1,nombre)
+			return None
+		elif raiz.c1.nombre<nombre:
+			if raiz.c2.nombre>nombre:
+				if raiz.p2!=None:
+					return self.busqueda_recursiva(raiz.p2,nombre)
+				return None
+			elif raiz.c2.nombre<nombre:
+				if raiz.c3.nombre>nombre:
+					if raiz.p3!=None:
+						return self.busqueda_recursiva(raiz.p3,nombre)
+					return None
+				elif raiz.c3.nombre<nombre:
+					if raiz.c4.nombre>nombre:
+						if raiz.p4!=None:
+							return self.busqueda_recursiva(raiz.p4,nombre)
+					elif raiz.c4.nombre<nombre:
+						if raiz.p5!=None:
+							return self.busqueda_recursiva(raiz.p5,nombre)
+						return None
+					else:
+						return raiz.c4
+				else:
+					return raiz.c3
+			else:
+				return raiz.c2		
+		else:
+			return raiz.c1
+
+
+
+
+
+
 
 
 

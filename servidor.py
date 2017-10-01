@@ -41,17 +41,14 @@ def cargar():
 @app.route('/crear_folder',methods=['POST'])
 def crear_folder():
 	folder = str(request.form['folder'])
-	sesion.crear_folder()
+	ruta = str(request.form['ruta'])
+	sesion.crear_folder(folder,ruta)
+	return "hoa"
 
 @app.route('/carpeta',methods=['POST'])
 def carpeta():
 	ruta = str(request.form['user'])
-	ret = sesion.obtener_raiz(ruta)
-	print ret
-	if ret==None:
-		return "F"
-	else:
-		return sesion.carpetas(ruta)
+	return sesion.obtener_raiz(ruta)
 
 
 

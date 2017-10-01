@@ -35,23 +35,13 @@ public class create_folder extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
              HttpSession ses = request.getSession();
-             
-            
-            sesion s = new sesion();
-            String ccn = ses.getAttribute("nombre").toString();
-            if(ccn=="null"){
-                response.sendRedirect("/Drive_USAC?message=" + URLEncoder.encode("sesion cerrada", "UTF-8"));
-                
-            }
+            String url = ses.getAttribute("url").toString();
+            String folder = request.getParameter("folder");
             conexion c = new conexion();
             
-            
-            out.print(s.cabeza(ccn));
-            out.print("<div>");
-            out.print("saludos desde creador de folders");
-            
-            out.print("</div>");
-            out.print(s.pie());
+            c.crearCarpeta(folder,url);
+            out.print(folder);
+            out.print(url);
         }
     }
 

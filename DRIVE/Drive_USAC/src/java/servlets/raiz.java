@@ -47,11 +47,11 @@ public class raiz extends HttpServlet {
             conexion c = new conexion();
             String cad = c.verCarperas(sesion.getAttribute("nombre").toString());
             out.print(s.cabeza(ccn));
-            
+            out.print(ses.getAttribute("url"));
             out.print("<div class ='col-lg-4'>");
-            out.print(" <form action=\"create_folder\" method=\"post\">");
+            out.print(" <form action='create_folder'  method=\"post\">");
             
-            out.print("<input type='text'/ class ='form-control'>");
+            out.print("<input type='text'/  id='folder' name='folder' class ='form-control'>");
             out.print("<input type=\"submit\" name=\"entrar\" value=\"crear carpeta\" class=\"btn-primary col-lg-12 col-md-12 col-sm-12\"/>");
             
             out.print("</form>");
@@ -62,7 +62,7 @@ public class raiz extends HttpServlet {
             
             out.print(" <form action=\"load_file\" method=\"post\">");
             out.print("<input type='file'/ class ='fileupload'>");
-            out.print("<input type=\"submit\" name=\"entrar\" value=\"cargar archivo\" class=\"btn-primary col-lg-6 col-md-6 col-sm-6\"/>");
+            out.print("<input type=\"submit\" name=\"entrar\" value=\"cargar archivo\" class=\"btn-success col-lg-12 col-md-12 col-sm-12\"/>");
             
             out.print("</form>");
             out.print("</div>");

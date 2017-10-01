@@ -50,14 +50,15 @@ public class login extends HttpServlet {
                     response.sendRedirect("index.jsp?message=" + URLEncoder.encode(message, "UTF-8"));
 
                 }else{
+                    sesion.setAttribute("url", usu+"/");
                     if (sesion.getAttribute("nombre")==null){
                         sesion.setAttribute("nombre", usu);
                         out.print("bienvenido :) "+sesion.getAttribute("nombre"));
-                        response.sendRedirect("inicio");
+                        response.sendRedirect("raiz");
 
                     }else{
                         out.print("bienvenido "+sesion.getAttribute("nombre"));
-                        response.sendRedirect("inicio");
+                        response.sendRedirect("raiz");
                     }
 
                 }

@@ -69,8 +69,6 @@ public class sesion {
 "            </div>";
     }
     
-   
-    
     
     
     
@@ -80,6 +78,12 @@ public class sesion {
 "        <!-- /#page-content-wrapper -->\n" +
 "\n" +
 "    </div>\n" +
+                "<in>"+
+                
+                
+                
+                
+                
 "    <!-- /#wrapper -->\n" +
 "\n" +
 "    <!-- Bootstrap core JavaScript -->\n" +
