@@ -87,6 +87,27 @@ public class raiz extends HttpServlet {
                 
             }
             out.print("</div>");
+            String jscript="<script>"
+                    + "function aURL(){" 
+                    + "var cad=document.getElementById(\"boton\").value;"
+                    +"alert(cad); "
+                    
+                    +"$.ajax({\n" +
+                    "        data:{\n" +
+                    "            'nombre':cad,\n" +
+                    
+                    "        },\n" +
+                    "        url:'/clientes/consultaXnombre',\n" +
+                    "        type:'get',\n" +
+                    "        success:function(data){\n" +
+                    "            var html=clientificador(data,pag);\n" +
+                    "            $('#dt_cliente').html(html);\n" +
+                    "        },\n" +
+                    "    });"
+                    +"}"
+                    + "</script>";
+            
+            out.print(jscript);
             out.print(s.pie());
         }
     }
